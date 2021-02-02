@@ -38,6 +38,20 @@ const getRandomFloat = (a, b, symbolNumber) => {
   }
 }
 
+// Переписала :-)
+const getRandomFloat_ = (a, b, symbolNumber) => {
+  let min, max, randomFloat;
+  a > b ? (min = b, max = a) : (min = a, max = b);
+  if (a >= 0 && b >= 0 && symbolNumber >= 0 && symbolNumber % 1 === 0) {
+    min = Math.ceil(min * 10 ** symbolNumber);
+    max = Math.floor(max * 10 ** symbolNumber);
+    randomFloat = Math.round(Math.random() * (max - min) + min) / 10 ** symbolNumber;
+    return +randomFloat.toFixed(symbolNumber);
+  }
+  return -1;
+}
+
 getRandomInt();
 getRandomInt_();
 getRandomFloat();
+getRandomFloat_();
