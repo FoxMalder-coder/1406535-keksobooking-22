@@ -1,4 +1,4 @@
-const SIMILAR_RENT_OBJECT_COUNT = 10;
+const SIMILAR_RENT_OBJECT_COUNT = 1;
 
 const TITLE = [
   'Уютное гнездышко для молодоженов',
@@ -88,9 +88,7 @@ const getRandomArrayElement = (array) => {
 };
 
 const isUnique = (array, value) => {
-  return array.some(function(arrayValue) {
-    return value === arrayValue;
-  }) ? false : true;
+  return array.some(arrayValue => arrayValue === value) ? false : true;
 };
 
 const getRandomArrayChain = (array) => {
