@@ -125,7 +125,7 @@ const createRentObject = () => {
     },
     offer: {
       title: getRandomArrayElement(TITLE),
-      address: address,
+      address: '' + address.x + ', ' + address.y,
       price: getRandomInt(0, 1000000),
       type: getRandomArrayElement(TYPE),
       rooms: getRandomInt(1, 100),
