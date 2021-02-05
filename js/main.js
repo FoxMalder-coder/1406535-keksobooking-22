@@ -1,4 +1,4 @@
-const SIMILAR_RENT_OBJECT_COUNT = 1;
+const SIMILAR_RENT_OBJECT_COUNT = 10;
 
 const TITLE = [
   'Уютное гнездышко для молодоженов',
