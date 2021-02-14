@@ -1,6 +1,4 @@
-import {convertRentObjectType} from './utils.js';
-import {generateListOfLi} from './utils.js';
-import {generateListOfImg} from './utils.js';
+import {convertRentObjectType, generateListOfLi, generateListOfImg} from './utils.js';
 
 const map = document.querySelector('#map-canvas');
 const templateFragment = document.querySelector('#card').content;
@@ -50,12 +48,11 @@ const createLayoutForRenObject = (object) => {
 const createLayoutForSimularRenObjects = (array, number) => {
   if (number > array.length) {
     number = array.length;
-  };
+  }
 
   for (let i = 0; i < number; i++) {
     map.appendChild(createLayoutForRenObject(array[i]));
-  };
+  }
 };
-
 
 export {createLayoutForSimularRenObjects};
