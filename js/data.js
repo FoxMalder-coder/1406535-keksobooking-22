@@ -1,7 +1,7 @@
-import {TITLE, TYPE, FEATURES, DESCRIPTION, PHOTOS} from './const.js';
-import {COUNT as SIMILAR_RENT_OBJECT_COUNT} from './const.js';
-import {TIME as CHECKIN_CHECKOUT_TIME} from './const.js';
-import {getRandomInt, getRandomArrayElement, getRandomArrayChain, getRandomAvatar, getRandomLocation} from './util.js';
+import {TITLE, TYPE, FEATURES, DESCRIPTION, PHOTOS} from './consts.js';
+import {COUNT as SIMILAR_RENT_OBJECT_COUNT} from './consts.js';
+import {TIME as CHECKIN_CHECKOUT_TIME} from './consts.js';
+import {getRandomInt, getRandomArrayElement, getRandomArrayChain, getRandomAvatar, getRandomLocation} from './utils.js';
 
 const createRentObject = () => {
   const address = getRandomLocation();
@@ -26,6 +26,6 @@ const createRentObject = () => {
   };
 }
 
-const similarRentObjects = new Array(SIMILAR_RENT_OBJECT_COUNT).fill(null).map(() => createRentObject());
+const createSimilarRentObjects = new Array(SIMILAR_RENT_OBJECT_COUNT).fill(null).map(() => createRentObject());
 
-export {similarRentObjects};
+export {createSimilarRentObjects};
