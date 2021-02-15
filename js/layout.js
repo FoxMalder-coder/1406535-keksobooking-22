@@ -66,14 +66,14 @@ const createLayoutForRentObject = (object) => {
 
   const features = element.querySelector('.popup__features');
   features.innerHTML = '';
-  features.appendChild(generateListOfLi(object.offer.features));
+  object.offer.features.length ? features.appendChild(generateListOfLi(object.offer.features)) : features.remove();
 
   const description = element.querySelector('.popup__description');
   object.offer.description ? description.textContent = object.offer.description : description.remove();
 
   const photos = element.querySelector('.popup__photos');
   photos.innerHTML = '';
-  photos.appendChild(generateListOfImg(object.offer.photos));
+  object.offer.photos.length ? photos.appendChild(generateListOfImg(object.offer.photos)) : photos.remove();
 
   const avatar = element.querySelector('.popup__avatar');
   object.author.avatar ? avatar.src = object.author.avatar : avatar.remove();
