@@ -1,4 +1,5 @@
 import {createSimilarRentObjects as data} from './data.js';
-import {createLayoutForSimularRenObjects} from './layout.js';
+import {createLayoutForRentObject} from './layout.js';
+import './form.js';
 
-createLayoutForSimularRenObjects(data, 1);
+createLayoutForRentObject(data[0]);

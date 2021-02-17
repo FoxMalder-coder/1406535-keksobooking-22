@@ -52,44 +52,4 @@ const getRandomLocation = () => {
   };
 };
 
-const convertRentObjectType = (type) => {
-  let newType;
-
-  switch (type) {
-    case 'bungalow': newType = 'Бунгало'; break;
-    case 'house': newType = 'Дом'; break;
-    case 'palace': newType = 'Дворец'; break;
-    default: newType = 'Квартира';
-  }
-
-  return newType;
-};
-
-const generateListOfLi = (array) => {
-  const list = document.createDocumentFragment();
-
-  for (let i = 0; i < array.length; i++) {
-    const item = document.createElement('li');
-    item.className = 'popup__feature';
-    item.classList.add('popup__feature--' + array[i]);
-    list.appendChild(item);
-  }
-  return list;
-};
-
-const generateListOfImg = (array) => {
-  const list = document.createDocumentFragment();
-
-  for (let i = 0; i < array.length; i++) {
-    const item = document.createElement('img');
-    item.className = 'popup__photo';
-    item.width = 45;
-    item.height = 40;
-    item.alt = 'Фотография жилья';
-    item.src = array[i];
-    list.appendChild(item);
-  }
-  return list;
-};
-
-export {getRandomInt, getRandomArrayElement, getRandomArrayChain, getRandomAvatar, getRandomLocation, convertRentObjectType, generateListOfLi, generateListOfImg};
+export {getRandomInt, getRandomArrayElement, getRandomArrayChain, getRandomAvatar, getRandomLocation};
