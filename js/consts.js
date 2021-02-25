@@ -1,3 +1,35 @@
+const RENT_OBJECT_TYPES = [
+  {
+    bungalow: {
+      name: 'Бунгало',
+      minPrice: 0,
+    },
+  },
+  {
+    flat: {
+      name: 'Квартира',
+      minPrice: 1000,
+    },
+  },
+  {
+    house: {
+      name: 'Дом',
+      minPrice: 5000,
+    },
+  },
+  {
+    palace: {
+      name: 'Дворец',
+      minPrice: 10000,
+    },
+  },
+];
+
+const CENTER_TOKYO = {
+  lat: 35.68950,
+  lng: 139.69171,
+};
+
 const COUNT = 10;
 
 const TITLE = [
@@ -54,4 +86,4 @@ const PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
 ];
 
-export {COUNT, TITLE, TYPE, TIME, FEATURES, DESCRIPTION, PHOTOS};
+export {RENT_OBJECT_TYPES, CENTER_TOKYO, COUNT, TITLE, TYPE, TIME, FEATURES, DESCRIPTION, PHOTOS};
