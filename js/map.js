@@ -1,13 +1,13 @@
 /* global L:readonly */
 import {unblock} from './active.js';
-import {CENTER_TOKYO} from './utils.js';
+import {CENTER_TOKYO} from './consts.js';
 import {createSimilarRentObjects as points} from './data.js';
 import {createLayoutForRentObject} from './layout.js';
 
 const address = document.querySelector('#address');
 const changeCoordinates = ({lat, lng}) => {
   address.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
-  address.disabled = true;
+  address.readOnly = true;
 };
 
 changeCoordinates(CENTER_TOKYO);
@@ -15,8 +15,8 @@ changeCoordinates(CENTER_TOKYO);
 const map = L.map('map-canvas')
   .on('load', unblock)
   .setView({
-    lat: 35.68950,
-    lng: 139.69171,
+    lat: CENTER_TOKYO.lat,
+    lng: CENTER_TOKYO.lng,
   }, 12);
 
 L.tileLayer(

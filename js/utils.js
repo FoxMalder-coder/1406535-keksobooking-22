@@ -1,34 +1,4 @@
-const RENT_OBJECT_TYPES = [
-  {
-    bungalow: {
-      name: 'Бунгало',
-      minPrice: 0,
-    },
-  },
-  {
-    flat: {
-      name: 'Квартира',
-      minPrice: 1000,
-    },
-  },
-  {
-    house: {
-      name: 'Дом',
-      minPrice: 5000,
-    },
-  },
-  {
-    palace: {
-      name: 'Дворец',
-      minPrice: 10000,
-    },
-  },
-];
-
-const CENTER_TOKYO = {
-  lat: 35.68950,
-  lng: 139.69171,
-};
+import {RENT_OBJECT_TYPES} from './consts.js';
 
 const getRentObjectProperties = (string, price = false) => {
 
@@ -97,4 +67,4 @@ const getRandomLocation = () => {
   };
 };
 
-export {getRandomInt, getRandomArrayElement, getRandomArrayChain, getRandomAvatar, getRandomLocation, getRentObjectProperties, CENTER_TOKYO};
+export {getRandomInt, getRandomArrayElement, getRandomArrayChain, getRandomAvatar, getRandomLocation, getRentObjectProperties};
