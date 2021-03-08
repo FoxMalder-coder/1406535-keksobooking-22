@@ -1,23 +1,20 @@
 /* global L:readonly */
 import {unblock} from './active.js';
-import {CENTER_TOKYO} from './consts.js';
-import {createSimilarRentObjects as points} from './data.js';
 import {createLayoutForRentObject} from './layout.js';
 
-const address = document.querySelector('#address');
-const changeCoordinates = ({lat, lng}) => {
-  address.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
-  address.readOnly = true;
+const CENTER_TOKYO = {
+  lat: 35.68950,
+  lng: 139.69171,
 };
 
-changeCoordinates(CENTER_TOKYO);
+const address = document.querySelector('#address');
 
 const map = L.map('map-canvas')
   .on('load', unblock)
   .setView({
     lat: CENTER_TOKYO.lat,
     lng: CENTER_TOKYO.lng,
-  }, 12);
+  }, 10);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -26,55 +23,68 @@ L.tileLayer(
   },
 ).addTo(map);
 
-const mainPinIcon = L.icon({
+const mainMarkerIcon = L.icon({
   iconUrl: '../img/main-pin.svg',
   iconSize: [52, 52],
   iconAnchor: [26, 52],
 });
 
-const mainPinMarker = L.marker(
+const icon = L.icon({
+  iconUrl: '../img/pin.svg',
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+});
+
+const mainMarker = L.marker(
   {
-    lat: 35.68950,
-    lng: 139.69171,
+    lat: CENTER_TOKYO.lat,
+    lng: CENTER_TOKYO.lng,
   },
   {
     draggable: true,
-    icon: mainPinIcon,
+    icon: mainMarkerIcon,
   },
-);
+).addTo(map);
 
-mainPinMarker.addTo(map);
 
-mainPinMarker.on('moveend', (evt) => {
-  changeCoordinates(evt.target.getLatLng());
+mainMarker.on('moveend', (evt) => {
+  const {lat, lng} = evt.target.getLatLng();
+  address.value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
 });
+
+const resetMainMarker = () => {
+  mainMarker.setLatLng({
+    lat: CENTER_TOKYO.lat,
+    lng: CENTER_TOKYO.lng,
+  });
+  address.value = `${CENTER_TOKYO.lat}, ${CENTER_TOKYO.lng}`;
+};
 
 // mainPinMarker.remove();
 
-points.forEach((point) => {
-  const {location: {x: lat, y: lng}} = point;
-  const icon = L.icon({
-    iconUrl: '../img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
+const renderOrdinaryMarkers = (points) => {
+  points.forEach((point) => {
+    const { location: {lat, lng} } = point;
 
-  const marker = L.marker(
-    {
-      lat,
-      lng,
-    },
-    {
-      icon,
-    },
-  );
-
-  marker
-    .addTo(map)
-    .bindPopup(
-      createLayoutForRentObject(point),
+    const marker = L.marker(
       {
-        keepInView: true,
+        lat,
+        lng,
+      },
+      {
+        icon,
       },
     );
-});
+
+    marker
+      .addTo(map)
+      .bindPopup(
+        createLayoutForRentObject(point),
+        {
+          keepInView: true,
+        },
+      );
+  });
+};
+
+export {renderOrdinaryMarkers, resetMainMarker, CENTER_TOKYO};

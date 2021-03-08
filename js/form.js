@@ -1,9 +1,12 @@
-import {getRentObjectProperties} from './utils.js';
-const MIN_TITLE_LENGTH = 30;
-const MAX_TITLE_LENGTH = 100;
-const MAX_PRICE = 1000000;
-const MAX_ROOMS = 100;
-const MIN_GUESTS = 0;
+import {getRentObjectProperties} from './objects-properties.js';
+
+const TitleInputProperties = {
+  MIN: 30,
+  MAX: 100,
+}
+
+const ROOMS_INPUT_MAX = 100;
+const GUESTS_INPUT_MIN = 0;
 
 const type = document.querySelector('#type');
 const price = document.querySelector('#price');
@@ -13,12 +16,14 @@ const title = document.querySelector('#title');
 const rooms = document.querySelector('#room_number');
 const guests = document.querySelector('#capacity');
 
-type.addEventListener('change', () => {
+const onTypeChange = () => {
   const value = type.options[type.selectedIndex].value;
   const minPrice = getRentObjectProperties(value, true);
   price.placeholder = minPrice;
   price.min = minPrice;
-});
+}
+
+type.addEventListener('change', onTypeChange);
 
 const onSelectTimeChange = (evt) => {
   evt.target.id === 'timein' ? timeout.selectedIndex = timein.selectedIndex : timein.selectedIndex = timeout.selectedIndex;
@@ -31,11 +36,11 @@ timeout.addEventListener('change', onSelectTimeChange);
 title.addEventListener('input', () => {
   const valueLength = title.value.length;
 
-  if (valueLength < MIN_TITLE_LENGTH) {
-    title.setCustomValidity(`Еще ${MIN_TITLE_LENGTH - valueLength} симв.`);
+  if (valueLength < TitleInputProperties.MIN) {
+    title.setCustomValidity(`Еще ${TitleInputProperties.MIN - valueLength} симв.`);
   }
-  else if (valueLength > MAX_TITLE_LENGTH) {
-    title.setCustomValidity(`${valueLength - MAX_TITLE_LENGTH} симв. лишние`);
+  else if (valueLength > TitleInputProperties.MAX) {
+    title.setCustomValidity(`${valueLength - TitleInputProperties.MAX} симв. лишние`);
   }
   else {
     title.setCustomValidity('');
@@ -45,13 +50,13 @@ title.addEventListener('input', () => {
 });
 
 price.addEventListener('input', () => {
-  const value = price.value;
+  const value = Number(price.value);
 
   if (value < price.min) {
     price.setCustomValidity(`Цена не может быть меньше ${price.min} ₽/ночь`);
   }
-  else if (value > MAX_PRICE) {
-    price.setCustomValidity(`Цена не может быть больше ${MAX_PRICE} ₽/ночь`);
+  else if (value > price.max) {
+    price.setCustomValidity(`Цена не может быть больше ${price.max} ₽/ночь`);
   }
   else {
     price.setCustomValidity('');
@@ -61,15 +66,15 @@ price.addEventListener('input', () => {
 });
 
 const onSelectRoomsGuestsChange = () => {
-  if (rooms.value < guests.value && rooms.value != MAX_ROOMS && guests.value != MIN_GUESTS) {
+  if (rooms.value < guests.value && rooms.value != ROOMS_INPUT_MAX && guests.value != GUESTS_INPUT_MIN) {
     rooms.setCustomValidity('');
     guests.setCustomValidity('Гостей не может быть больше, чем комнат');
   }
-  else if (rooms.value == MAX_ROOMS && guests.value != MIN_GUESTS) {
+  else if (rooms.value == ROOMS_INPUT_MAX && guests.value != GUESTS_INPUT_MIN) {
     rooms.setCustomValidity('');
     guests.setCustomValidity('Единственный доступный выбор "Не для гостей"');
   }
-  else if (guests.value == MIN_GUESTS && rooms.value != MAX_ROOMS) {
+  else if (guests.value == GUESTS_INPUT_MIN && rooms.value != ROOMS_INPUT_MAX) {
     rooms.setCustomValidity('Единственный доступный выбор "100 комнат"');
     guests.setCustomValidity('');
   }
@@ -84,3 +89,5 @@ const onSelectRoomsGuestsChange = () => {
 
 rooms.addEventListener('change', onSelectRoomsGuestsChange);
 guests.addEventListener('change', onSelectRoomsGuestsChange);
+
+export {onTypeChange};

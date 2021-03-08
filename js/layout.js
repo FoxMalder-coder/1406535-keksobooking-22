@@ -1,4 +1,4 @@
-import {getRentObjectProperties} from './utils.js';
+import {getRentObjectProperties} from './objects-properties.js';
 
 const generateFeaturesList = (array) => {
   const list = document.createDocumentFragment();
@@ -55,7 +55,7 @@ const createLayoutForRentObject = (object) => {
   const newAvatar = element.querySelector('.popup__avatar');
   avatar ? newAvatar.src = avatar : newAvatar.remove();
 
-  return(fragment.appendChild(element));
+  return (fragment.appendChild(element));
 };
 
 export {createLayoutForRentObject};
